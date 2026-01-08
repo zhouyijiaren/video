@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  sfu:
+    build:
+      context: ../../..
+      dockerfile: video/webrtc-custom/sfu/docker-test-puppeteer/Dockerfile.sfu
+    environment:
+      PORT: 3001
+    expose:
+      - "3001"
+      - "40000-49999/udp"
+
+  client:
+    build:
+      context: ../../..
+      dockerfile: video/webrtc-custom/sfu/docker-test-puppeteer/Dockerfile.client
+    environment:
+      PORT: 8080
+    expose:
+      - "8080"
+
+  tester:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVER_URL: http://sfu:3001
+      CLIENT_URL: http://client:8080
+      ROOM_ID: demo
+    depends_on:
+      - sfu
+      - client

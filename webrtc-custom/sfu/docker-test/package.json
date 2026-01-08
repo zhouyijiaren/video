@@ -1,0 +1,16 @@
+{
+  "name": "webrtc-sfu-docker-test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "mediasoup-client": "^3.18.3",
+    "socket.io-client": "^4.7.5",
+    "wrtc": "^0.4.7",
+    "node-pre-gyp": "^0.17.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "webrtc-sfu-puppeteer-test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "^22.15.0"
+  }
+}

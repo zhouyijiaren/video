@@ -1,0 +1,10 @@
+FROM docker.m.daocloud.io/library/node:20-bullseye
+
+WORKDIR /app
+
+COPY video/webrtc-custom/client ./client
+COPY video/webrtc-custom/sfu/docker-test-puppeteer/static-server.js ./
+
+ENV PORT=8080
+
+CMD ["node", "static-server.js"]

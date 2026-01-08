@@ -1,0 +1,20 @@
+FROM docker.m.daocloud.io/library/node:20-bullseye
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  python3 \
+  python3-pip \
+  make \
+  g++ \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY video/webrtc-custom/sfu/package.json ./
+RUN npm install
+
+COPY video/webrtc-custom/sfu/server.js ./
+COPY video/webrtc-custom/sfu/config.js ./
+
+ENV PORT=3001
+
+CMD ["node", "server.js"]

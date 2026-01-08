@@ -1,0 +1,19 @@
+{
+  "name": "webrtc-sfu-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test:interfaces": "node tools/interface-test.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mediasoup": "^3.15.8",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
+    "mediasoup-client": "^3.18.3",
+    "fake-mediastreamtrack": "^2.2.1"
+  }
+}

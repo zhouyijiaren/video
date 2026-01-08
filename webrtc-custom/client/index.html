@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebRTC SFU Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>WebRTC SFU Demo</h1>
+        <p>Multi-party + screen share (mediasoup)</p>
+      </header>
+
+      <section class="controls">
+        <label>
+          Room
+          <input id="roomId" value="demo" />
+        </label>
+        <label>
+          Server URL
+          <input id="serverUrl" value="http://localhost:3001" />
+        </label>
+        <button id="joinBtn">Join</button>
+        <button id="leaveBtn" disabled>Leave</button>
+        <button id="toggleMicBtn" disabled>Mute Mic</button>
+        <button id="toggleCamBtn" disabled>Stop Cam</button>
+        <button id="shareBtn" disabled>Share Screen</button>
+      </section>
+
+      <section>
+        <h2>Local</h2>
+        <div id="localContainer" class="grid"></div>
+      </section>
+
+      <section>
+        <h2>Remote</h2>
+        <div id="remoteContainer" class="grid"></div>
+      </section>
+    </div>
+
+    <script src="./vendor/socket.io.min.js?v=1"></script>
+    <script src="./vendor/mediasoup-client.min.js?v=5"></script>
+    <script>
+      if (!window.mediasoupClient && typeof mediasoupClient !== 'undefined') {
+        window.mediasoupClient = mediasoupClient;
+      }
+      if (!window.mediasoupClient) {
+        console.error('[demo] mediasoupClient missing after vendor script load');
+      }
+    </script>
+    <script defer src="client.v3.js?v=14"></script>
+  </body>
+</html>
