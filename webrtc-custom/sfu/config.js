@@ -1,5 +1,29 @@
 'use strict';
 
+const os = require('os');
+
+function pickAnnouncedIp() {
+  const envIp = process.env.ANNOUNCED_IP;
+  if (envIp) return envIp;
+
+  const interfaces = os.networkInterfaces();
+  const preferred = ['en0', 'en1', 'eth0', 'ens33', 'wlan0'];
+
+  const pickFrom = names => {
+    for (const name of names) {
+      const list = interfaces[name] || [];
+      for (const iface of list) {
+        if (iface && iface.family === 'IPv4' && !iface.internal) {
+          return iface.address;
+        }
+      }
+    }
+    return null;
+  };
+
+  return pickFrom(preferred) || pickFrom(Object.keys(interfaces)) || undefined;
+}
+
 module.exports = {
   http: {
     port: process.env.PORT ? Number(process.env.PORT) : 3001,
@@ -33,7 +57,7 @@ module.exports = {
       listenIps: [
         {
           ip: '0.0.0.0',
-          announcedIp: process.env.ANNOUNCED_IP || undefined,
+          announcedIp: pickAnnouncedIp(),
         },
       ],
       enableUdp: process.env.MEDIASOUP_FORCE_TCP ? false : true,

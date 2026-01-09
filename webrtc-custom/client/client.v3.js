@@ -374,7 +374,12 @@ async function joinRoom() {
     if (urlParams.get('fake') === 'canvas') {
       localStream = createFakeMediaStream();
     } else {
-      localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+      } catch (err) {
+        console.warn('[demo] getUserMedia failed, falling back to fake stream', err);
+        localStream = createFakeMediaStream();
+      }
     }
 
     const tracks = localStream.getTracks();
