@@ -59,7 +59,7 @@ yarn-error.log
 /vendor/bundle/
 
 #UI Kit
-agora-rn-uikit/
+# agora-rn-uikit/
 
 #built website
 dist/
